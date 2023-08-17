@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    database: analytics-391012
+    schema: raw
+    tables:
+      - name: raw_mentloja
+
+  - name: dbt_nfigueira
+    database: analytics-391012
+    schema: dbt_nfigueira
+    tables:
+      - name: dim_pedido
+      - name: dim_produto
+      - name: dim_vendedor
+      - name: dim_item_pedido
