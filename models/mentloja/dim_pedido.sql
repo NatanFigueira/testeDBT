@@ -1,6 +1,6 @@
 	SELECT NP.numpedido
           ,NP.dtPedido
-	      ,V.id
+	      ,V.idVendedor as fkVendedor
 	FROM (SELECT DISTINCT numpedido
 	                     ,dtpedido
 	                     ,nomevendedor
