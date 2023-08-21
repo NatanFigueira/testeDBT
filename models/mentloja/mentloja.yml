@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: dim_vendedor
+    description: registros de novos vendedores
+    columns: 
+    - name: idVendedor
+      description: chave primária da tabela vendedores
+      tests:
+        - unique
+        - not_null
+    - name: nomeVendedor
+      description: nome do vendedor
+
+  - name: dim_produto
+    description: registros de novos produtos
+    columns:
+    - name: idProduto
+      description: chave primária da tabela produtos
+      tests:
+        - unique
+        - not_null
+    - name: produto
+      description: nome do produto
+    - name: vlproduto
+      description: valor em reais do produto
+        
+  - name: dim_pedido
+    description: registros de novos pedidos
+    columns:
+    - name: numpedido
+      description: chave primária da tabela pedidos
+      tests:
+        - unique
+        - not_null
+    - name: dtpedido
+      description: data em que o pedido foi realizado
+    - name: fkVendedor
+      description: chave estrangeira do vendedor responsável pelo pedido
+      tests:
+        - not_null
+        - relationships:
+            to: source('dbt_nfigueira', 'dim_vendedor')
+            field: idVendedor
+
+  - name: dim_item_pedido
+    description: registros de cada item dos novos pedidos
+    columns: 
+    - name: idItemPedido
+      description: contador de item por pedido
+      tests:
+        - not_null
+    - name: fkPedido
+      description: chave estrangeira referenciando o pedido
+      tests:
+        - not_null
+        - relationships:
+            to: source('dbt_nfigueira', 'dim_pedido')
+            field: 'numpedido'
+    - name: fkProduto
+      description: chave estrangeira referenciando o produto
+      tests:
+        - not_null
+        - relationships:
+            to: source('dbt_nfigueira', 'dim_produto')
+            field: idProduto
+    - name: qtdProduto
+      description: Quantidade do produto pedida

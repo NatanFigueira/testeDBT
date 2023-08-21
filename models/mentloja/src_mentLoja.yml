@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: raw
+    database: analytics-391012
+    schema: raw
+    tables:
+      - name: raw_mentloja
+        description: tabela do BQ com os dados brutos
+
+
+  - name: dbt_nfigueira
+    database: analytics-391012
+    schema: dbt_nfigueira
+    tables:
+      - name: dim_pedido
+        description: um único pedido por linha
+      - name: dim_produto
+        description: um único produto por linha
+      - name: dim_vendedor
+        description: um único vendedor por linha
+      - name: dim_item_pedido
+        description: lista cada item de cada pedido
